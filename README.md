@@ -29,7 +29,7 @@ AptosGifts is a decentralized digital gift card platform built on the Aptos bloc
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/aptos-gifts.git
+git clone https://github.com/druxamb/aptos-gifts.git
 cd aptos-gifts
 ```
 
