@@ -17,6 +17,12 @@ AptosGifts is a decentralized digital gift card platform built on the Aptos bloc
 - **Wallet**: Petra Wallet Integration
 - **Development**: Node.js, ts-node
 
+## Contract Information
+
+- **Contract Address**: `0x349837d718a486ba72702b62c9229f0d4592438584a6f21bdc4daa940a8fe4b6`
+- **Network**: Testnet
+- **Explorer URL**: [View on Aptos Explorer](https://explorer.aptoslabs.com/account/0x349837d718a486ba72702b62c9229f0d4592438584a6f21bdc4daa940a8fe4b6?network=testnet)
+
 ## Getting Started
 
 ### Prerequisites
