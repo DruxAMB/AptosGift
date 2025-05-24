@@ -1,10 +1,15 @@
 [package]
 name = "aptos_gifts"
 version = "1.0.0"
-authors = ["Your Name"]
+authors = ["AptosGifts Team"]
 
 [addresses]
-aptos_gifts = "_"
+aptos_gifts = "0x349837d718a486ba72702b62c9229f0d4592438584a6f21bdc4daa940a8fe4b6"
+
+[dev-addresses]
+aptos_gifts = "0x349837d718a486ba72702b62c9229f0d4592438584a6f21bdc4daa940a8fe4b6"
 
 [dependencies]
 AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework/", rev = "main" }
+
+[dev-dependencies]
