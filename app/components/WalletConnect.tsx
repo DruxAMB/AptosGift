@@ -6,10 +6,18 @@ import { MouseEvent } from 'react';
 export function WalletConnect() {
   const { connect, disconnect, account, connected } = useWallet();
 
+  const handleConnect = async (e: MouseEvent) => {
+    try {
+      await connect('petra');
+    } catch (error) {
+      console.error('Failed to connect wallet:', error);
+    }
+  };
+
   if (!connected) {
     return (
       <button
-        onClick={(e: MouseEvent) => connect('petra')}
+        onClick={handleConnect}
         className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
       >
         Connect Wallet

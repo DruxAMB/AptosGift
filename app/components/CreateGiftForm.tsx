@@ -2,23 +2,52 @@
 
 import { useState, FormEvent } from 'react';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Aptos, AptosConfig, Network } from '@aptos-labs/ts-sdk';
+
+const config = new AptosConfig({ network: Network.TESTNET });
+const client = new Aptos(config);
 
 export function CreateGiftForm() {
-  const { account } = useWallet();
+  const { account, signAndSubmitTransaction } = useWallet();
   const [amount, setAmount] = useState('');
   const [recipient, setRecipient] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
     
+    if (!account) {
+      setError('Please connect your wallet first');
+      setLoading(false);
+      return;
+    }
+
     try {
-      // TODO: Implement gift creation logic with Aptos SDK
-      console.log('Creating gift:', { amount, recipient, message });
+      const response = await signAndSubmitTransaction({
+        data: {
+          function: `${account.address}::gift::create_gift`,
+          typeArguments: [],
+          functionArguments: [
+            recipient,
+            parseInt(amount),
+            message || ""
+          ]
+        }
+      });
+
+      console.log('Transaction submitted:', response);
+      
+      // Reset form
+      setAmount('');
+      setRecipient('');
+      setMessage('');
     } catch (error) {
       console.error('Error creating gift:', error);
+      setError(error instanceof Error ? error.message : 'Failed to create gift');
     } finally {
       setLoading(false);
     }
@@ -26,6 +55,12 @@ export function CreateGiftForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {error && (
+        <div className="p-3 bg-red-50 text-red-700 rounded-md">
+          {error}
+        </div>
+      )}
+      
       <div>
         <label htmlFor="amount" className="block text-sm font-medium text-gray-700">
           Amount (GUI)
